@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing: Mini-Hackathon</title>
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Biblioteca QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;600;700&display=swap');
+        
+        body {
+            background-color: #0f172a; /* Slate 900 */
+            color: #cbd5e1; /* Slate 300 */
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Fira Code', monospace;
+            color: #f8fafc;
+        }
+        .highlight {
+            color: #10b981; /* Emerald 500 */
+        }
+        .card {
+            background-color: #1e293b;
+            border-left: 4px solid #10b981;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen p-4 md:p-8 lg:p-12">
+
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 lg:gap-16">
+        
+        <!-- LATERAL ESQUERDA: Projetor / QR Code (Oculto no celular dos alunos) -->
+        <div class="hidden md:flex md:w-1/3 flex-col items-center pt-8 text-center">
+            <div class="sticky top-12 bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-2xl">
+                <h2 class="text-2xl font-bold mb-2">Escaneie para ler</h2>
+                <p class="text-sm mb-6 text-slate-400">Aponte a câmera para acessar o briefing no celular.</p>
+                
+                <!-- Container do QR Code -->
+                <div id="qrcode" class="p-4 bg-white rounded-lg inline-block shadow-lg shadow-emerald-500/20"></div>
+                
+                <p class="mt-4 text-xs text-slate-500 break-all" id="url-display"></p>
+            </div>
+        </div>
+
+        <!-- LATERAL DIREITA: Conteúdo do Briefing (Visível para todos) -->
+        <div class="md:w-2/3 space-y-8 pb-12">
+            
+            <!-- Cabeçalho -->
+            <header class="border-b border-slate-700 pb-6">
+                <div class="inline-block bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold mb-4 tracking-wider">
+                    TEMPO LIMITE: 20 MINUTOS
+                </div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-2">DOCUMENTO DE BRIEFING</h1>
+                <h2 class="text-xl text-slate-400">PROJETO: <span class="highlight">Biblioteca Virtual Didática</span></h2>
+            </header>
+
+            <!-- O Desafio -->
+            <section>
+                <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span>🚀</span> O Desafio
+                </h3>
+                <p class="mb-4 leading-relaxed">
+                    Nossa Biblioteca Virtual já possui sua estrutura base (o sistema de cadastro de livros). No entanto, para que ela não seja apenas um "depósito de PDFs", precisamos da sua ajuda para dar vida à plataforma.
+                </p>
+                <blockquote class="card p-4 rounded-r-lg italic text-slate-300 mb-4">
+                    "Um pequeno código salva milhares de vidas." — e uma funcionalidade bem pensada pode transformar completamente a forma como os alunos estudam.
+                </blockquote>
+                <p class="leading-relaxed">
+                    Sua missão é projetar a <strong class="text-white">próxima grande funcionalidade (feature)</strong> do nosso sistema. A ideia vencedora será desenvolvida e implementada oficialmente no site.
+                </p>
+            </section>
+
+            <!-- A Dinâmica -->
+            <section>
+                <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span>⏱️</span> A Dinâmica
+                </h3>
+                <p class="mb-4 text-slate-400">O tempo é curto, o foco deve ser na clareza e no impacto da ideia, não nos detalhes técnicos.</p>
+                <ul class="space-y-3 bg-slate-800/50 p-6 rounded-xl border border-slate-700/50">
+                    <li><strong class="text-white">00:00 - 03:00 | O Briefing:</strong> Leitura deste documento e divisão dos grupos.</li>
+                    <li><strong class="text-white">03:00 - 13:00 | Mão na Massa:</strong> Brainstorming. Preencham as 4 perguntas do "Canvas da Ideia".</li>
+                    <li><strong class="text-white">13:00 - 18:00 | Pitch de Elevador:</strong> Cada grupo terá exatamente <span class="highlight font-bold">1 minuto</span> para apresentar sua ideia para a sala.</li>
+                    <li><strong class="text-white">18:00 - 20:00 | Votação e Pódio:</strong> Escolha da ideia vencedora.</li>
+                </ul>
+            </section>
+
+            <!-- O Canvas da Ideia -->
+            <section>
+                <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span>📝</span> O "Canvas da Ideia" (Sua Entrega)
+                </h3>
+                <p class="mb-4 text-slate-400">Respondam às 4 perguntas abaixo para apresentar no Pitch:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+                        <div class="text-emerald-400 font-bold font-mono mb-2">1. O Problema</div>
+                        <p class="text-sm">Qual dor ou dificuldade de um estudante a sua ideia resolve?</p>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+                        <div class="text-emerald-400 font-bold font-mono mb-2">2. A Solução (A Feature)</div>
+                        <p class="text-sm">O que é a sua ideia na prática? Como o aluno vai interagir com ela?</p>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+                        <div class="text-emerald-400 font-bold font-mono mb-2">3. O Impacto</div>
+                        <p class="text-sm">Como isso melhora a vida de quem usa a biblioteca?</p>
+                    </div>
+                    <div class="bg-slate-800 p-5 rounded-lg border border-slate-700">
+                        <div class="text-emerald-400 font-bold font-mono mb-2">4. Nome da Feature</div>
+                        <p class="text-sm">Dê um nome criativo e comercial para a funcionalidade.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Critérios de Avaliação -->
+            <section>
+                <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span>🏆</span> Critérios de Avaliação
+                </h3>
+                <ul class="list-disc list-inside space-y-2 text-slate-300 ml-2">
+                    <li><strong class="text-white">Viabilidade Técnica (40%):</strong> É possível programar e implementar isso na plataforma em tempo hábil?</li>
+                    <li><strong class="text-white">Impacto Real (40%):</strong> O quanto essa funcionalidade realmente ajuda no aprendizado?</li>
+                    <li><strong class="text-white">Criatividade (20%):</strong> O quão original é a abordagem de vocês.</li>
+                </ul>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Script para gerar o QR Code -->
+    <script>
+        window.onload = function() {
+            // Pega a URL atual exata de onde a página está rodando
+            const currentUrl = window.location.href;
+            
+            // Exibe a URL em formato de texto (opcional)
+            document.getElementById('url-display').innerText = currentUrl;
+            
+            // Gera o QR Code na div id="qrcode"
+            new QRCode(document.getElementById("qrcode"), {
+                text: currentUrl,
+                width: 220,
+                height: 220,
+                colorDark : "#0f172a", // Cor escura (combina com o fundo)
+                colorLight : "#ffffff", // Fundo branco do QR
+                correctLevel : QRCode.CorrectLevel.H // Alta redundância
+            });
+        };
+    </script>
+</body>
+</html>
